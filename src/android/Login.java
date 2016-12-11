@@ -1,44 +1,70 @@
 package android;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Login
- */
+import mysql.MySQL;
+
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String Account = request.getParameter("loginAccount");
-		String Password = request.getParameter("loginPwd");
-		System.out.println(Account+Password);
-		response.getWriter().append("Hello VM Android");
+	private String mAccount;
+
+	private String mPassword;
+
+	public Login() {
+		super();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		mAccount = request.getParameter("loginAccount");
+		mPassword = request.getParameter("loginPwd");
+		System.out.println("Account:" + mAccount + "Passowd" + mPassword);
+		System.out.println(loginInCheck(mAccount, mPassword));
+		JSONObject obj = new JSONObject();
+		obj.clear();
+		if (loginInCheck(mAccount, mPassword)) {
+			obj.put("success", "true");
+		} else {
+			obj.put("success", "false");
+		}
+		response.getWriter().append(obj.toString());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
+	}
+
+	// 登陆账号密码比对，正确则登陆成功
+	private boolean loginInCheck(String account, String passwoed) {
+
+		MySQL mMySQL2048 = new MySQL();
+
+		String sql = "SELECT * FROM usr_info where usr_account='" + account + "';";
+		ResultSet rs = mMySQL2048.executeQuery(sql);
+
+		try {
+			if (rs.next()) {
+				if (rs.getString("usr_password").equals(passwoed)) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
 	}
 
 }
