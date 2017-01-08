@@ -1,4 +1,4 @@
-package android;
+package android.servlet;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -10,17 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import android.JSONObject;
 import mysql.MySQL;
 
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Android_Login")
+public class Android_Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private String mAccount;
 
 	private String mPassword;
+	
+	JSONObject obj = new JSONObject();
 
-	public Login() {
+	public Android_Login() {
 		super();
 	}
 
@@ -30,13 +35,10 @@ public class Login extends HttpServlet {
 		mPassword = request.getParameter("loginPwd");
 		System.out.println("Account:" + mAccount + "Passowd" + mPassword);
 		System.out.println(loginInCheck(mAccount, mPassword));
-		JSONObject obj = new JSONObject();
+		loginInCheck(mAccount, mPassword);
 		obj.clear();
-		if (loginInCheck(mAccount, mPassword)) {
-			obj.put("success", "true");
-		} else {
-			obj.put("success", "false");
-		}
+		loginInCheck(mAccount, mPassword);
+		
 		response.getWriter().append(obj.toString());
 	}
 

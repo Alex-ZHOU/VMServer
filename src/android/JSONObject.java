@@ -1,5 +1,8 @@
 package android;
 
+import entities.User;
+import utils.EncapsulateParseJson;
+
 public class JSONObject {
 
 	private String jsonString;
@@ -12,6 +15,10 @@ public class JSONObject {
 		obj.put("CurrentScores", "1");
 		obj.put("BastScores", "1");
 		System.out.println(obj.toString());
+		User user = new User();
+		user.setUserId(22);
+		user.setPassword("HAHHA");
+		System.out.println(EncapsulateParseJson.encapsulate(user));;
 	}
 
 	public JSONObject() {
