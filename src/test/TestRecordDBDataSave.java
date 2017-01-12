@@ -66,7 +66,7 @@ public class TestRecordDBDataSave {
 		Connection connection = mysql.getConnection();
 
 		String sql = "insert into record_db (usr_id,times,db,longitude,latitude,time,timekeeper) values (?,?,?,?,?,?,?)";
-
+				
 		PreparedStatement ps;
 
 		try {
