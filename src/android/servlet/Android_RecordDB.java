@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import entities.BaseInfo;
 import entities.RecordDB;
@@ -56,6 +58,8 @@ public class Android_RecordDB extends HttpServlet {
 		System.out.println("Android_RecordDB:" + str);
 		recordDB = EncapsulateParseJson.parse(RecordDB.class, str);
 
+		BaseInfo baseInfo = getBaseInfo();
+
 		StringBuffer stringBufferDB = new StringBuffer();
 		StringBuffer stringBufferLatitude = new StringBuffer();
 		StringBuffer stringBufferLongitude = new StringBuffer();
@@ -93,7 +97,7 @@ public class Android_RecordDB extends HttpServlet {
 
 		Connection connection = mysql.getConnection();
 
-		String sql = "insert into record_db (usr_id,times,db,longitude,latitude,time,timekeeper) values (?,?,?,?,?,?,?)";
+		String sql = "insert into record_db (usr_id,times,db,longitude,latitude,time,timekeeper,year,month,day) values (?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement ps;
 		int row = 0;
@@ -102,7 +106,7 @@ public class Android_RecordDB extends HttpServlet {
 			// usr_id
 			ps.setInt(1, recordDB.getUserId());
 			// times
-			ps.setInt(2, recordDB.getTimes());
+			ps.setInt(2, baseInfo.getRecordTimes() + 1);
 			// db
 			ps.setString(3, db);
 			// longitude
@@ -113,6 +117,14 @@ public class Android_RecordDB extends HttpServlet {
 			ps.setString(6, time);
 			// timekeeper
 			ps.setString(7, timekeeper);
+			
+			Calendar c = Calendar.getInstance();
+			
+			ps.setInt(8, c.get(Calendar.YEAR));
+			
+			ps.setInt(9, c.get(Calendar.MONTH)+1);
+			
+			ps.setInt(10, c.get(Calendar.DAY_OF_YEAR));
 
 			row = ps.executeUpdate();
 
@@ -135,13 +147,12 @@ public class Android_RecordDB extends HttpServlet {
 
 		response.getWriter().append(EncapsulateParseJson.encapsulate(back)).close();
 
-		updataBaseInfo();
+		updataBaseInfo(baseInfo);
 
 	}
 
 	@SuppressWarnings("deprecation")
-	private void updataBaseInfo() {
-		BaseInfo baseInfo = getBaseInfo();
+	private void updataBaseInfo(BaseInfo baseInfo) {
 
 		int maxDb = baseInfo.getMaxDb();
 
