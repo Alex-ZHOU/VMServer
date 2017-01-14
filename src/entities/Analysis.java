@@ -48,7 +48,6 @@ public class Analysis {
 	 */
 	private int _20Times;
 	
-	
 	/**
 	 * 20 －40 分贝 安静、犹如轻声絮语
 	 */
