@@ -51,10 +51,10 @@ public class Android_History extends HttpServlet {
 	}
 
 	
-	private List<History> list = new ArrayList<>();
+	private List<History> list ;
 	
 	private void getHistory(int userId) {
-
+		list = new ArrayList<>();
 		MySQL mysql = new MySQL();
 
 		String sql = "SELECT * FROM record_db where usr_id=?  order by record_db_id desc;";
