@@ -20,14 +20,14 @@ import utils.EncapsulateParseJson;
 /**
  * Servlet implementation class Android_StoreRecordDb
  */
-@WebServlet("/Android_StoreRecordDb")
-public class Android_StoreRecordDb extends HttpServlet {
+@WebServlet("/Android_StoreRecordDbList")
+public class Android_StoreRecordDbList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Android_StoreRecordDb() {
+	public Android_StoreRecordDbList() {
 		super();
 	}
 
@@ -64,7 +64,7 @@ public class Android_StoreRecordDb extends HttpServlet {
 			ps = mysql.getConnection().prepareStatement(sql);
 			ps.setInt(1, storeRecordId);
 			ResultSet rs = ps.executeQuery();
-
+			
 			while (rs.next()) {
 				StoreRecordDb storeRecordDb = new StoreRecordDb();
 
@@ -78,6 +78,8 @@ public class Android_StoreRecordDb extends HttpServlet {
 
 				mList.add(storeRecordDb);
 			}
+			
+			rs.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

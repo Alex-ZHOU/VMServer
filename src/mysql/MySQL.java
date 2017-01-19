@@ -2,6 +2,7 @@ package mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MySQL {
@@ -12,7 +13,8 @@ public class MySQL {
 	public static final String PASSWORD = "root";
 
 	private Connection connection = null;
-
+	
+	private PreparedStatement preparedStatement = null;
 
 	public MySQL() {
 		try {
@@ -28,19 +30,35 @@ public class MySQL {
 	public Connection getConnection() {
 		try {
 			Class.forName(DRIVER);
-			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			return DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return connection;
+		return null;
+	}
+
+	public PreparedStatement getPreparedStatement(String sql) {
+		try {
+			return getConnection().prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void closeAll() {
 		if (null != connection) {
 			try {
 				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (preparedStatement != null) {
+			try {
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
