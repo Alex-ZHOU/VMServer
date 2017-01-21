@@ -13,8 +13,15 @@ SELECT * FROM record_db where usr_id=1  order by record_db_id desc;
 
 -- TABLE base_info
 insert into base_info 
-(usr_id,usr_account,nickname,record_times,average_db,max_db,min_db,record_minter) 
-values (1,"133","133",0,0,0,0,0);
+(usr_id,usr_account,nickname,record_times,average_db,max_db,min_db,record_minter,head_protrait) 
+values (1,"133","Alex",0,0,0,0,0,1);
+insert into base_info 
+(usr_id,usr_account,nickname,record_times,average_db,max_db,min_db,record_minter,head_protrait) 
+values (2,"123","cmk",0,0,0,0,0,2);
+insert into base_info 
+(usr_id,usr_account,nickname,record_times,average_db,max_db,min_db,record_minter,head_protrait) 
+values (3,"124","crj",0,0,0,0,0,3);
+SELECT * FROM base_info;
 SELECT * FROM base_info where usr_id=1; 
 UPDATE base_info set record_times=record_times+1,average_db=22,max_db=70,min_db=50,record_minter=99 WHERE usr_id=1;
 
@@ -33,3 +40,11 @@ SELECT * FROM store_info ;
 insert into store_record_db (store_id,usr_id,year,month,day,reocrd_status)values(1,1,2017,1,2,1);
 insert into store_record_db (store_id,usr_id,year,month,day,reocrd_status)values(1,2,2017,1,2,1);
 SELECT * FROM store_record_db where store_id = 1 && reocrd_status=1;
+SELECT * FROM store_record_db where store_id = 1 ;
+
+-- TABLE image_id_to_address
+insert into image_id_to_address (address) values ("/Image/head_portrait_1.jpg");
+insert into image_id_to_address (address) values ("/Image/head_portrait_2.jpg");
+insert into image_id_to_address (address) values ("/Image/head_portrait_3.jpg");
+SELECT * FROM image_id_to_address where image_id = 1;
+UPDATE `VoiceMonitor`.`image_id_to_address` SET `address`='/Image/head_portrait_1.jpg' WHERE `image_id`='1';

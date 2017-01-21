@@ -19,6 +19,10 @@ public class StoreRecordDb {
 
 	private int Day;
 	
+	private int UserHeadPortraitImageId;
+
+	private String NickName;
+	
 	private List<Data> RecordList = new ArrayList<>();
 	
 	public int getStoreRecordId() {
@@ -87,6 +91,22 @@ public class StoreRecordDb {
 
 	public Data instancesData() {
 		return new Data();
+	}
+
+	public int getUserHeadPortraitImageId() {
+		return UserHeadPortraitImageId;
+	}
+
+	public void setUserHeadPortraitImageId(int userHeadPortraitImageId) {
+		UserHeadPortraitImageId = userHeadPortraitImageId;
+	}
+
+	public String getNickName() {
+		return NickName;
+	}
+
+	public void setNickName(String nickName) {
+		NickName = nickName;
 	}
 
 	public class Data {

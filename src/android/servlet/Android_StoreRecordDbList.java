@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.StoreRecordDb;
 import mysql.MySQL;
+import mysql.biz.BaseInfoBiz;
+import mysql.entities.BaseInfo;
 import utils.EncapsulateParseJson;
 
 /**
@@ -64,7 +66,7 @@ public class Android_StoreRecordDbList extends HttpServlet {
 			ps = mysql.getConnection().prepareStatement(sql);
 			ps.setInt(1, storeRecordId);
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				StoreRecordDb storeRecordDb = new StoreRecordDb();
 
@@ -76,9 +78,15 @@ public class Android_StoreRecordDbList extends HttpServlet {
 
 				storeRecordDb.setDay(rs.getInt("day"));
 
+				BaseInfo baseInfo = new BaseInfoBiz().getByUserId(rs.getInt("usr_id"));
+
+				storeRecordDb.setUserHeadPortraitImageId(baseInfo.getHead_protrait());
+
+				storeRecordDb.setNickName(baseInfo.getNickname());
+
 				mList.add(storeRecordDb);
 			}
-			
+
 			rs.close();
 
 		} catch (SQLException e) {
@@ -91,7 +99,6 @@ public class Android_StoreRecordDbList extends HttpServlet {
 			}
 			mysql.closeAll();
 		}
-
 	}
 
 	/**

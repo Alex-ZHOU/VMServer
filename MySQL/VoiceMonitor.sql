@@ -52,13 +52,14 @@ CREATE TABLE `VoiceMonitor`.`record_db` (
 
 CREATE TABLE `VoiceMonitor`.`base_info` (
   `usr_id` INT NOT NULL,
-  `usr_account`  VARCHAR(45) NULL,
+  `usr_account`  VARCHAR(45) NOT NULL,
   `nickname`  VARCHAR(45) NULL,
   `record_times` INT NOT NULL,
   `average_db` DOUBLE NOT NULL,
   `max_db` INT NOT NULL,
   `min_db` INT NOT NULL,
   `record_minter` DOUBLE NOT NULL,
+  `head_protrait` INT NULL,
   PRIMARY KEY (`usr_id`));
 -- DROP TABLE `VoiceMonitor`.`base_info`;
 
