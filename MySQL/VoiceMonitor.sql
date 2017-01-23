@@ -82,6 +82,7 @@ CREATE TABLE `VoiceMonitor`.`store_info` (
   `summary` VARCHAR(256) NULL,
   `latitude` DOUBLE,
   `longitude` DOUBLE,
+  `type` VARCHAR(45) NULL,
   PRIMARY KEY (`store_id`));
 -- DROP TABLE `VoiceMonitor`.`store_info`; 
 

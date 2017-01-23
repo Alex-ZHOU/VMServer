@@ -33,8 +33,9 @@ insert into advertising_column (advertisement_id,image_id,title) values (4,5,"�
 SELECT * FROM advertising_column; 
 
 -- TABLE store_info
-insert into store_info (advertisement_id,image_id,title,average_db,summary,latitude,longitude) values (1,5,"惠州曼哈顿",55,"惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次还不错，去过一次惠州xxx热舞酒店，还不错，去过一次还不错，去过一次惠州xxx热舞酒店，还不错，去过一次还不错，去过一次惠州xxx热舞酒店，还不错，去过一次",23.530347,116.38376);
+insert into store_info (advertisement_id,image_id,title,average_db,summary,latitude,longitude,type) values (1,5,"惠州曼哈顿",55,"惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次惠州xxx热舞酒店，还不错，去过一次还不错，去过一次惠州xxx热舞酒店，还不错，去过一次还不错，去过一次惠州xxx热舞酒店，还不错，去过一次还不错，去过一次惠州xxx热舞酒店，还不错，去过一次",23.530347,116.38376,"bar");
 SELECT * FROM store_info ;
+SELECT * FROM store_info where type="ktv";
 
 -- TABLE store_record_db
 insert into store_record_db (store_id,usr_id,year,month,day,reocrd_status)values(1,1,2017,1,2,1);
