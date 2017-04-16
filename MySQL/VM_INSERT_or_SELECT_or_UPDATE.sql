@@ -49,3 +49,6 @@ insert into image_id_to_address (address) values ("/Image/head_portrait_2.jpg");
 insert into image_id_to_address (address) values ("/Image/head_portrait_3.jpg");
 SELECT * FROM image_id_to_address where image_id = 1;
 UPDATE `VoiceMonitor`.`image_id_to_address` SET `address`='/Image/head_portrait_1.jpg' WHERE `image_id`='1';
+
+
+SELECT * from store_record_db where reocrd_status = 1;

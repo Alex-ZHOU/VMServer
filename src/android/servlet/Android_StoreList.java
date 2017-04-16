@@ -45,6 +45,7 @@ public class Android_StoreList extends HttpServlet {
 			entities.StoreInfo returnStoreInfo = new entities.StoreInfo();
 			returnStoreInfo.setStoreId(list.get(i).getStore_id());
 			returnStoreInfo.setImageId(list.get(i).getImage_id());
+			returnStoreInfo.setAdvertisementId(list.get(i).getAdvertisement_id());
 			returnStoreInfo.setTitle(list.get(i).getTitle());
 			returnStoreInfo.setSummary(list.get(i).getSummary());
 			returnStoreInfo.setAverageDb(list.get(i).getAverage_db());

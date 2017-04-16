@@ -83,6 +83,7 @@ public class Android_GetBaseInfo extends HttpServlet {
 				baseInfo.setMaxDb(rs.getInt("max_db"));
 				baseInfo.setMinDb(rs.getInt("min_db"));
 				baseInfo.setRecordMinter(rs.getDouble("record_minter"));
+				baseInfo.setHeadProtrait(rs.getInt("head_protrait"));
 			} else {
 				return null;
 			}

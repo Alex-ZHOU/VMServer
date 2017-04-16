@@ -49,7 +49,19 @@ CREATE TABLE `VoiceMonitor`.`record_db` (
 -- DROP TABLE `VoiceMonitor`.`record_db`;
 
 
-
+/**
+ * TABLE NAME:base_info      用户基本信息
+ * 
+ * Colums:    usr_id:        用户id号（主键）
+ * 		      usr_account:   用户账号
+ *            nickname:      用户昵称
+ *            record_times:  用户记录次数
+ *            average_db:    记录平均分贝数
+ *            max_db:        最大分贝数
+ *            min_db:        最小分贝数
+ *            record_minter: 记录总时长
+ *            head_protrait: 头像id号
+ */
 CREATE TABLE `VoiceMonitor`.`base_info` (
   `usr_id` INT NOT NULL,
   `usr_account`  VARCHAR(45) NOT NULL,
@@ -63,7 +75,15 @@ CREATE TABLE `VoiceMonitor`.`base_info` (
   PRIMARY KEY (`usr_id`));
 -- DROP TABLE `VoiceMonitor`.`base_info`;
 
-
+  
+/**
+ * TABLE NAME:advertising_column      广告栏数据
+ * 
+ * Colums:    advertising_column_id:  广告id号（主键、自动生成）
+ * 		      advertisement_id:       广告id号
+ *            image_id:               广告图片id
+ *            title:                  广告标题
+ */
 CREATE TABLE `VoiceMonitor`.`advertising_column` (
   `advertising_column_id` INT NOT NULL auto_increment,
   `advertisement_id` INT NOT NULL,
@@ -72,7 +92,20 @@ CREATE TABLE `VoiceMonitor`.`advertising_column` (
   PRIMARY KEY (`advertising_column_id`));
 -- DROP TABLE `VoiceMonitor`.`advertising_column`;
 
-
+  
+/**
+ * TABLE NAME:store_info        商家信息
+ * 
+ * Colums:    store_id:         商家id号（主键、自动生成）
+ * 		      advertisement_id: 广告id号
+ *            image_id:         图片id号
+ *            title:            标题
+ *            average_db:       记录平均分贝数
+ *            summary:          商家概要
+ *            latitude:         经度
+ *            longitude:        纬度
+ *            type:             商家类型
+ */
 CREATE TABLE `VoiceMonitor`.`store_info` (
   `store_id` INT NOT NULL auto_increment,
   `advertisement_id` INT NOT NULL,
@@ -87,6 +120,23 @@ CREATE TABLE `VoiceMonitor`.`store_info` (
 -- DROP TABLE `VoiceMonitor`.`store_info`; 
 
 
+ /**
+ * TABLE NAME:store_record_db  商家单次记录分贝的所有信息
+ * 
+ * Colums:    store_record_id: 记录的id号（主键、自动生成）
+ *            store_id：        商家id号
+ * 		      usr_id:          用户id号
+ * 		      times:           记录的次数，仅针对此id号的商家
+ *            year:            记录时的年份
+ *            month:           记录时的月份
+ *            day:             记录时的天数
+ *            db:              分贝串，以"|"分割
+ *            latitude:        纬度串，以"|"分割
+ *            longitude:       经度串，以"|"分割
+ *            time:            实际事件串，以"|"分割
+ * 			  timekeeper:      当前次数记录的事件点串，以"|"分割
+ *            reocrd_status：   记录状态，区分审核未审核
+ */
 CREATE TABLE `VoiceMonitor`.`store_record_db` (
   `store_record_id` INT NOT NULL auto_increment,
   `store_id` INT NOT NULL,
