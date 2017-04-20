@@ -82,6 +82,10 @@ public class Android_SignUp extends HttpServlet {
 						row = ps2.executeUpdate();
 						if(row ==1){
 							mLogin.setReturn("success");
+							Login.User user = mLogin.getUser();
+							user.setUserName(account);
+							user.setUserId(usr_id);
+							mLogin.setUser(user);
 						}
 					}
 					

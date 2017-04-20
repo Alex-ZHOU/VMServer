@@ -22,7 +22,7 @@ import utils.EncapsulateParseJson;
 public class Android_GetBaseInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private int userId;
+	//private int userId;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,16 +38,19 @@ public class Android_GetBaseInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		userId = Integer.valueOf(request.getParameter("UserId"));
+		int userId = Integer.valueOf(request.getParameter("UserId"));
 
 		System.out.println("Android_GetBaseInfo:" + userId);
 
-		BaseInfo baseInfo = getBaseInfo();
+		BaseInfo baseInfo = getBaseInfo(userId);
 
 		String json = EncapsulateParseJson.encapsulate(baseInfo);
 
 		System.out.println(json);
-
+		// 这句话的意思，是让浏览器用utf8来解析返回的数据
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		// 这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859
+		response.setCharacterEncoding("UTF-8");
 		response.getWriter().append(json).close();
 	}
 
@@ -60,7 +63,7 @@ public class Android_GetBaseInfo extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private BaseInfo getBaseInfo() {
+	private BaseInfo getBaseInfo(int userId) {
 
 		BaseInfo baseInfo = new BaseInfo();
 
@@ -90,11 +93,6 @@ public class Android_GetBaseInfo extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 			mysql.closeAll();
 		}
 		return baseInfo;
