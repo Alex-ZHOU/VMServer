@@ -8,9 +8,10 @@ import java.sql.SQLException;
 public class MySQL {
 
 	public static final String DRIVER = "com.mysql.jdbc.Driver";
-	public static final String URL = "jdbc:mysql://127.0.0.1:3306/VoiceMonitor";
+	public static final String URL = "jdbc:mysql://127.0.0.1:3306/VoiceMonitor?useUnicode=true&characterEncoding=UTF-8";
 	public static final String USERNAME = "root";
 	public static final String PASSWORD = "root";
+	
 
 	private Connection connection = null;
 	

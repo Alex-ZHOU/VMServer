@@ -169,4 +169,20 @@ CREATE TABLE `VoiceMonitor`.`image_id_to_address` (
   PRIMARY KEY (`image_id`));
 -- DROP TABLE `VoiceMonitor`.`image_id_to_address`; 
 
-
+/**
+ * TABLE NAME:feedback          反馈表
+ * 
+ * Colums:    feedback_id       反馈id号
+ *            time              反馈的时间
+ *            type              反馈类型
+ *            description       反馈描述
+ */
+CREATE TABLE `VoiceMonitor`.`feedback` (
+  `feedback_id` INT NOT NULL auto_increment,
+  `usr_id` INT NOT NULL,
+  `time` VARCHAR(45) NOT NULL,
+  `type` INT NOT NULL,
+  `description` MEDIUMTEXT NULL,
+ PRIMARY KEY (`feedback_id`));
+-- DROP TABLE `VoiceMonitor`.`feedback`; 
+insert into feedback (type,time,usr_id,description) values (1,"2017-1-1",1,"哈啊哈");
